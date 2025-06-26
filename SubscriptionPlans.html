@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscription Plans – GrassrootsHub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #061874;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    h1 {
+      color: #061874;
+      margin-bottom: 40px;
+    }
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      flex: 1 1 280px;
+      max-width: 300px;
+      border: 2px solid transparent;
+    }
+
+    .plan.highlight {
+      border-color: #12ba1b;
+    }
+
+    .plan h2 {
+      color: #061874;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .plan .price {
+      font-size: 2rem;
+      color: #e74c3c;
+      margin: 20px 0;
+    }
+
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .plan ul li {
+      margin: 10px 0;
+    }
+
+    .plan button,
+    .plan a.button-link {
+      background-color: #061874;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      width: auto;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .plan button:hover,
+    .plan button:focus,
+    .plan a.button-link:hover,
+    .plan a.button-link:focus {
+      background-color: #03306a;
+      outline: none;
+    }
+
+    .plan button:focus,
+    .plan a.button-link:focus {
+      outline: 3px solid #e74c3c;
+      outline-offset: 2px;
+    }
+
+    .home-link {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .home-link a {
+      text-decoration: none;
+      color: #061874;
+      font-size: 1rem;
+      font-weight: bold;
+      outline-offset: 2px;
+    }
+
+    .home-link a:focus {
+      outline: 3px solid #e74c3c;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav div:last-child {
+        margin-top: 10px;
+      }
+
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .plans {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .plan {
+        max-width: 100%;
+        flex: none;
+        padding: 20px;
+      }
+
+      .plan h2 {
+        font-size: 1.3rem;
+      }
+
+      .plan .price {
+        font-size: 1.5rem;
+      }
+
+      .plan button,
+      .plan a.button-link {
+        width: 100%;
+        padding: 15px 0;
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Details button and details text */
+    .details {
+      margin-top: 15px;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .details.show {
+      display: block;
+    }
+
+    .details-btn {
+      background-color: #12ba1b;
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .details-btn:hover,
+    .details-btn:focus {
+      background-color: #0e8c15;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display: flex; align-items: center;">
+          <img src="C:\Users\micha\OneDrive\Documents\footy saas\Img\GRH logo.png" alt="GrassrootsHub Logo" style="height: 40px; margin-right: 10px;" />
+          <a href="index1.html" style="font-size: 1.4rem; font-weight: bold; color: white;">GrassrootsHub</a>
+        </div>
+        <a href="index1.html">Home</a>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\features.html">Features</a>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\contact.html">Contact</a>
+        <a href="SubscriptionPlans.html">Subscription Plans</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Choose Your Plan</h1>
+    <div class="plans">
+      <!-- Basic Plan -->
+      <div class="plan">
+        <h2>Basic</h2>
+        <div class="price">Free</div>
+        <ul>
+          <li>Basic Club Website</li>
+          <li>Customizable Colours & Fonts</li>
+          <li>No ongoing backend</li>
+          
+        </ul>
+        <button class="details-btn" aria-expanded="false" aria-controls="details-basic">Details</button>
+        <div class="details" id="details-basic" hidden>
+          <!-- Add your detailed text about the Basic plan here -->
+          <p>The Basic Landing Page plan gives your club a sleek, static web presence that’s fast, reliable, and easy to personalize.</p>
+          
+          <div>
+
+            <li>You can swap out logos and images</li>
+            <li>tweak colors to match your team’s identity</li>
+            <li>showcase essential sections like club info, news updates, and contact details.</li>
+                      
+       <div>
+        It's a no-fuss solution for clubs that want a professional-looking page without the need for ongoing maintenance or backend systems.
+
+      </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Amateur Plan -->
+      <div class="plan highlight">
+        <h2>Amateur</h2>
+        <div class="price">£25/mo</div>
+        <ul>
+          <li>Everything in basic</li>
+          <li>Simple resposive design</li>
+          <li>Auto Social Sharing</li>
+          <li>Add your own logos </li>
+          <li>Mobile responsive design </li>
+        </ul>
+        <a href="https://buy.stripe.com/dRm8wR847dqteQ495IgnK01" target="_blank" rel="noopener noreferrer" class="button-link">Select Plan</a>
+        <button class="details-btn" aria-expanded="false" aria-controls="details-amateur">Details</button>
+        <div class="details" id="details-amateur" hidden>
+          <!-- Add your detailed text about the Amateur plan here -->
+          <p>The Amateur Plan offers a professional, fully static website designed specifically for grassroots football clubs</p> 
+          
+         <div>
+          This plan includes a clean, modern layout showcasing key information your supporters want to see: an About section that tells your club’s story, a dynamic News section to keep fans updated, and a Matches section highlighting upcoming fixtures.
+          Because the site is static, it loads quickly and requires minimal upkeep, ideal for clubs that want a hassle-free digital presence without the complexity of a content management system or database.
+          Customization is at the heart of this plan:
+
+         </div> 
+
+<div>
+<li>Can easily change colors, fonts, and overall themes to match your team’s unique style.</li>
+<li>Replace placeholder images and logos with your own branding to maintain a professional look.</li>
+<li>The template is fully responsive, so it looks great on smartphones, tablets, and desktops alike.</li>
+</div>
+
+<p>
+  This plan strikes a balance between simplicity and flexibility, giving clubs a reliable online hub to engage fans and showcase their team with pride.
+</p>
+
+        </div>
+      </div>
+
+      <!-- Advanced Plan -->
+      <div class="plan">
+        <h2>Advanced</h2>
+        <div class="price">£60/mo</div>
+        <ul>
+          <li>Basic + Amateur</li>
+          <li>Premium static website </li>
+          <li>Advacned Layout</li>
+          <li>Exclusive access to Match report Tool</li>
+        </ul>
+        <a href="https://buy.stripe.com/eVq5kF0BF1HLdM01DggnK00" target="_blank" rel="noopener noreferrer" class="button-link">Select Plan</a>
+        <button class="details-btn" aria-expanded="false" aria-controls="details-advanced">Details</button>
+        <div class="details" id="details-advanced" hidden>
+          <!-- Add your detailed text about the Advanced plan here -->
+          
+          <p>The Advanced Subscription Plan offers a dynamic and visually polished static website designed to elevate your club’s online presence. Built with performance and branding in mind, this template provides the following key features:</p>
+          
+          <div>Structure & Functionality</div>
+
+          <li>A hero section with overlay effects, prominent call-to-action, and large headline text — perfect for club promotions or announcements.</li>
+          <li>Modular sections for About, News, Fixtures, and Contact, allowing your fans to quickly access everything they need.</li>
+          <li>Social media icons are integrated in the footer, increasing engagement beyond the page itself.</li>
+
+          
+
+        </div>
+      </div>
+    </div>
+
+    <div class="home-link">
+      <a href="index1.html">&larr; Back to Home</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 GrassrootsHub. All rights reserved. | <a href="C:\Users\micha\OneDrive\Documents\footy saas\PrivacyPolicy.html" style="color:#ddd; text-decoration: underline;">Privacy Policy</a>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.details-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const details = document.getElementById(button.getAttribute('aria-controls'));
+        const isVisible = details.classList.toggle('show');
+        details.hidden = !isVisible;
+        button.setAttribute('aria-expanded', isVisible);
+        button.textContent = isVisible ? 'Hide Details' : 'Details';
+      });
+    });
+  </script>
+</body>
+</html>
