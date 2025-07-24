@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrassrootsHub</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <style>
+    :root {
+      --primary: #0b1d6d;
+      --accent: #2ecc71;
+      --text-dark: #222;
+      --text-light: #fff;
+      --bg-light: #f4f6fa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #061874, #0c2477);
+      color: var(--text-light);
+      padding: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin-left: 18px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover, .dropbtn:hover {
+      background-color: var(--accent);
+      color: #fff;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 45px;
+      margin-right: 12px;
+    }
+
+    .logo span {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: none;
+      border: none;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+      padding: 8px 12px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--primary);
+      border-radius: 6px;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--accent);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .hero {
+      background: #fff;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-button {
+      background-color: var(--accent);
+      color: white;
+      padding: 14px 28px;
+      margin-top: 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #219d5e;
+    }
+
+    .features {
+      background-color: var(--bg-light);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .feature {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      flex: 1 1 280px;
+      max-width: 320px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .testimonials {
+      background-color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .testimonial {
+      max-width: 700px;
+      margin: auto;
+      font-style: italic;
+      color: #444;
+    }
+
+    .footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: #ccc;
+      text-decoration: underline;
+    }
+
+    /* Hamburger and Responsive Nav */
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      background: none;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: none;
+      }
+
+      .dropdown .dropbtn:focus + .dropdown-content {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="C:\Users\micha\OneDrive\Documents\footy saas\Img\GRH logo.png" alt="GrassrootsHub Logo" />
+        <span>GrassrootsHub</span>
+      </div>
+
+      <!-- Hamburger Button -->
+      <button id="menuToggle" class="hamburger" aria-label="Toggle navigation">☰</button>
+
+      <!-- Full Navigation -->
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="website_generator.html" id="createWebsiteLink" style="display: none;">Create Your Website</a>
+        <a href="contact.html">Contact</a>
+        <a href="SubscriptionPlans.html">Prices</a>
+        <a href="Auth.html" id="loginLink">Log in</a>
+        <a href="#" id="logoutLink" style="display: none;">Log out</a>
+
+        <div class="dropdown">
+          <button class="dropbtn">Tools ▼</button>
+          <div class="dropdown-content">
+            <a href="Match-report.html">Match Report Demo</a>
+            <a href="C:\Users\micha\OneDrive\Documents\footy saas\Match-report-live.html" id="matchReportGeneratorLink" style="display: none;">Match Report Generator</a>
+            <a href="C:\Users\micha\OneDrive\Documents\footy saas\Templates.html">Templates</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Your Club, Your Website – Instantly.</h1>
+    <p>Create a professional website for your football team in minutes. No code. No hassle. Just results.</p>
+    <a href="website_generator.html" class="cta-button" id="ctaButton" style="display: none;">Create Your Website</a>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <h2>3 Easy Steps...</h2>
+    <div class="feature-list">
+      <div class="feature">
+        <h3>Set up an account</h3>
+        <p>Sign in or sign up to get started</p>
+      </div>
+      <div class="feature">
+        <h3>Create Your Website</h3>
+        <p>With a few clicks of a button, create a downloadable mock-up site for your team</p>
+      </div>
+      <div class="feature">
+        <h3>Host Your Page Online</h3>
+        <p>Select a plan and we'll help you host your page on the Internet</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <h2>I've created my website, what next?</h2>
+    <p class="testimonial">Once you've created your static page and downloaded it, purchase your plan, and email your order number with the downloaded page attached. Our team will send you the live hosting URL. We'll keep the page updated too. Terms & Conditions apply.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  &copy; 2025 GrassrootsHub. All rights reserved. | <a href="PrivacyPolicy.html">Privacy Policy</a>
+</footer>
+
+<!-- Firebase Auth & Menu Toggle Script -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCmvjAF-OS6JesJeFwPvkcRbfFcVzVU2PI",
+    authDomain: "grassroothub-50867.firebaseapp.com",
+    projectId: "grassroothub-50867",
+    storageBucket: "grassroothub-50867.firebasestorage.app",
+    messagingSenderId: "539038576278",
+    appId: "1:539038576278:web:6fdbd49fefeefe4da95cb7",
+    measurementId: "G-J74XYH7KJ1"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  auth.onAuthStateChanged(user => {
+    const cta = document.getElementById('ctaButton');
+    const createLink = document.getElementById('createWebsiteLink');
+    const loginLink = document.getElementById('loginLink');
+    const logoutLink = document.getElementById('logoutLink');
+    const matchTool = document.getElementById('matchReportGeneratorLink');
+
+    if (user) {
+      cta.style.display = 'inline-block';
+      createLink.style.display = 'inline-block';
+      logoutLink.style.display = 'inline-block';
+      loginLink.style.display = 'none';
+      matchTool.style.display = 'block';
+    } else {
+      cta.style.display = 'none';
+      createLink.style.display = 'none';
+      logoutLink.style.display = 'none';
+      loginLink.style.display = 'inline-block';
+      matchTool.style.display = 'none';
+    }
+  });
+
+  document.getElementById('logoutLink').addEventListener('click', function (e) {
+    e.preventDefault();
+    auth.signOut().then(() => {
+      window.location.reload();
+    });
+  });
+
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    const nav = document.getElementById('navLinks');
+    nav.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>

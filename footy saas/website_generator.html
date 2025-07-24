@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Football Team Website Generator</title>
+  <style>
+    :root {
+      --primary-color: #0b1d51;
+      --secondary-color: #061232;
+      --accent-color: #142a5c;
+      --bg-color: #f7f9fc;
+      --text-color: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background: var(--primary-color);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--secondary-color);
+    }
+
+    nav a {
+      color: #fff;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: var(--accent-color);
+    }
+
+    .logo-section {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      position: relative;
+    }
+
+    .logo-section img {
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-top: 1rem;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .section h2 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .cards {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .card {
+      min-width: 250px;
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      position: relative;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent-color);
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    #addPlayerContainer {
+      max-width: 1100px;
+      margin: 0 auto 1rem;
+      padding: 0 1rem;
+      text-align: right;
+    }
+
+    #addPlayerBtn {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #addPlayerBtn:hover {
+      background: var(--accent-color);
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+
+    footer {
+      background: var(--secondary-color);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+
+    .theme-editor input {
+      margin: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-section">
+      <input type="file" id="logoUpload" accept="image/*" aria-label="Upload team logo" />
+      <br />
+      <img id="teamLogo" src="" alt="Team Logo" title="Click to change team logo" />
+      <h1 contenteditable="true" aria-label="Edit Team Name" spellcheck="true">Team Name</h1>
+      <p contenteditable="true" aria-label="Edit Team Slogan" spellcheck="true">Team Slogan</p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#squad">Squad</a>
+    <a href="#fixtures">Fixtures</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="section" id="about">
+    <h2>About</h2>
+    <textarea id="aboutInput" aria-label="About your team">Write about your team here...</textarea>
+    <p id="aboutPreview"></p>
+  </section>
+
+  <section class="section" id="squad">
+    <h2>Meet the Squad</h2>
+
+    <div id="addPlayerContainer">
+      <button id="addPlayerBtn" aria-label="Add player card">+ Add Player Card</button>
+    </div>
+
+    <input type="file" id="playerImageUpload" accept="image/*" multiple aria-label="Upload player images" />
+    <div class="cards" id="squadContainer"></div>
+  </section>
+
+  <section class="section" id="fixtures">
+    <h2>Upcoming Fixtures</h2>
+    <textarea id="fixturesInput" aria-label="Fixtures input">List fixtures here...</textarea>
+    <p id="fixturesPreview"></p>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <textarea id="contactInput" aria-label="Contact info">📧 Email: example@team.com
+📍 Address: Stadium Road</textarea>
+    <p id="contactPreview"></p>
+  </section>
+
+  <section class="section theme-editor">
+    <h2>Theme Editor</h2>
+    <label>Primary Color: <input type="color" id="primaryColor" value="#0b1d51" aria-label="Primary color"/></label>
+    <label>Secondary Color: <input type="color" id="secondaryColor" value="#061232" aria-label="Secondary color"/></label>
+    <label>Accent Color: <input type="color" id="accentColor" value="#142a5c" aria-label="Accent color"/></label>
+    <label>Background Color: <input type="color" id="bgColor" value="#f7f9fc" aria-label="Background color"/></label>
+    <label>Text Color: <input type="color" id="textColor" value="#333333" aria-label="Text color"/></label>
+  </section>
+
+  <section class="section">
+    <button onclick="updatePreview()" aria-label="Update preview">Update Preview</button>
+    <button onclick="savePage()" aria-label="Download page">Download Page</button>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> Your Football Team. All rights reserved.
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Logo upload logic
+    const logoUpload = document.getElementById("logoUpload");
+    const teamLogo = document.getElementById("teamLogo");
+
+    // Clicking the logo triggers file input for logo
+    teamLogo.addEventListener("click", () => logoUpload.click());
+
+    logoUpload.addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        teamLogo.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value = '';
+    });
+
+    // Create a player card element
+    function createPlayerCard(imageSrc = '') {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      // Player image
+      const img = document.createElement("img");
+      img.src = imageSrc || "https://via.placeholder.com/250x150?text=Player+Image";
+      img.alt = "Player Image";
+      img.title = "Click to change player image";
+
+      // Hidden file input for player image upload
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+      fileInput.className = "file-input";
+      fileInput.setAttribute("aria-label", "Upload player image");
+
+      // Upload icon overlay
+      const uploadIcon = document.createElement("div");
+      uploadIcon.className = "upload-icon";
+      uploadIcon.textContent = "✎";
+      uploadIcon.title = "Change Player Image";
+
+      // Clicking image or icon opens file input
+      img.addEventListener("click", () => fileInput.click());
+      uploadIcon.addEventListener("click", () => fileInput.click());
+
+      // Update image on file select
+      fileInput.addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      });
+
+      // Editable player name
+      const playerName = document.createElement("h3");
+      playerName.contentEditable = "true";
+      playerName.textContent = "Player Name";
+      playerName.setAttribute("aria-label", "Edit Player Name");
+      playerName.spellcheck = true;
+
+      // Editable position
+      const playerPosition = document.createElement("p");
+      playerPosition.contentEditable = "true";
+      playerPosition.textContent = "Position";
+      playerPosition.setAttribute("aria-label", "Edit Player Position");
+      playerPosition.spellcheck = true;
+
+      // Editable number
+      const playerNumber = document.createElement("p");
+      playerNumber.contentEditable = "true";
+      playerNumber.textContent = "Number";
+      playerNumber.setAttribute("aria-label", "Edit Player Number");
+      playerNumber.spellcheck = true;
+
+      // Assemble card
+      card.appendChild(img);
+      card.appendChild(uploadIcon);
+      card.appendChild(fileInput);
+      card.appendChild(playerName);
+      card.appendChild(playerPosition);
+      card.appendChild(playerNumber);
+
+      return card;
+    }
+
+    // Add new empty player card when button clicked
+    document.getElementById("addPlayerBtn").addEventListener("click", function() {
+      const container = document.getElementById("squadContainer");
+      container.appendChild(createPlayerCard());
+    });
+
+    // Handle multiple player images upload to create cards automatically
+    document.getElementById("playerImageUpload").addEventListener("change", function(e) {
+      const container = document.getElementById("squadContainer");
+      Array.from(e.target.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          container.appendChild(createPlayerCard(event.target.result));
+        };
+        reader.readAsDataURL(file);
+      });
+      e.target.value = '';
+    });
+
+    // Update preview content from textareas
+    function updatePreview() {
+      document.getElementById("aboutPreview").innerHTML = document.getElementById("aboutInput").value.replace(/\n/g, "<br>");
+      document.getElementById("fixturesPreview").innerHTML = document.getElementById("fixturesInput").value.replace(/\n/g, "<br>");
+      document.getElementById("contactPreview").innerHTML = document.getElementById("contactInput").value.replace(/\n/g, "<br>");
+
+      // Update theme colors live
+      const rootStyles = document.documentElement.style;
+      rootStyles.setProperty('--primary-color', document.getElementById("primaryColor").value);
+      rootStyles.setProperty('--secondary-color', document.getElementById("secondaryColor").value);
+      rootStyles.setProperty('--accent-color', document.getElementById("accentColor").value);
+      rootStyles.setProperty('--bg-color', document.getElementById("bgColor").value);
+      rootStyles.setProperty('--text-color', document.getElementById("textColor").value);
+    }
+
+    // Save the page without editing controls
+    function savePage() {
+      // Clone the whole document
+      const cloneDoc = document.documentElement.cloneNode(true);
+
+      // Remove file inputs
+      cloneDoc.querySelectorAll('input[type="file"]').forEach(input => input.remove());
+
+      // Remove Add Player Card container
+      const addPlayerContainer = cloneDoc.querySelector('#addPlayerContainer');
+      if (addPlayerContainer) addPlayerContainer.remove();
+
+      // Remove contenteditable attributes & related aria attributes on clone
+      cloneDoc.querySelectorAll('[contenteditable]').forEach(el => {
+        el.removeAttribute('contenteditable');
+        el.removeAttribute('aria-label');
+        el.removeAttribute('spellcheck');
+      });
+
+      // Remove upload icons overlays
+      cloneDoc.querySelectorAll('.upload-icon').forEach(el => el.remove());
+
+      // Remove hidden file inputs inside player cards (just in case)
+      cloneDoc.querySelectorAll('.file-input').forEach(el => el.remove());
+
+      // Remove input textareas and replace them with their preview paragraphs
+      // Replace About textarea with its preview paragraph content
+      const aboutTextArea = cloneDoc.querySelector('#aboutInput');
+      const aboutPreview = cloneDoc.querySelector('#aboutPreview');
+      if (aboutTextArea && aboutPreview) {
+        aboutTextArea.replaceWith(aboutPreview);
+      }
+
+      // Replace Fixtures textarea with its preview paragraph content
+      const fixturesTextArea = cloneDoc.querySelector('#fixturesInput');
+      const fixturesPreview = cloneDoc.querySelector('#fixturesPreview');
+      if (fixturesTextArea && fixturesPreview) {
+        fixturesTextArea.replaceWith(fixturesPreview);
+      }
+
+      // Replace Contact textarea with its preview paragraph content
+      const contactTextArea = cloneDoc.querySelector('#contactInput');
+      const contactPreview = cloneDoc.querySelector('#contactPreview');
+      if (contactTextArea && contactPreview) {
+        contactTextArea.replaceWith(contactPreview);
+      }
+
+      // Serialize and trigger download
+      const docType = "<!DOCTYPE html>";
+      const html = cloneDoc.outerHTML;
+
+      const blob = new Blob([docType + "\n" + html], {type: "text/html"});
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "football-team-website.html";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    // Initialize preview on load
+    updatePreview();
+
+  </script>
+</body>
+</html>
