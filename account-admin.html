@@ -142,7 +142,7 @@
       }
 
       document.getElementById('email').textContent = user.email;
-      document.getElementById('displayName').textContent = user.displayName || 'John Doe';
+      document.getElementById('displayName').textContent = user.email;
       document.getElementById('lastLogin').textContent = new Date(user.metadata.lastSignInTime).toLocaleString();
 
       try {
