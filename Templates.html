@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Templates | GrassrootsHub</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #061874;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      flex: 1 1 300px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .description {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .link-button {
+      background-color: #27ae60;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .link-button:hover {
+      background-color: #219150;
+    }
+
+    .home-button {
+      display: inline-block;
+      background-color: #180078;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      text-decoration: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button:hover {
+      background-color: #219150;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Home Button -->
+  <a href="index.html" class="home-button">← Home</a>
+
+  <h1>Explore Our Templates</h1>
+  <div class="container">
+    <div class="card">
+      <img src="C:\Users\micha\OneDrive\Documents\footy saas\Img\basic page.png" alt="Merch Store Template" />
+      <div class="card-content">
+        <p class="description">Sell club merch or tickets with a Stripe-ready responsive store layout.</p>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Basic-template.html" class="link-button">Basic Page</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="C:\Users\micha\OneDrive\Documents\footy saas\Img\amateur page.png" alt="Match Report Template" />
+      <div class="card-content">
+        <p class="description">Summarize matches with scorecards, key moments, and auto-social share integration.</p>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Amateur-template.html" class="link-button">Amateur Page</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="C:\Users\micha\OneDrive\Documents\footy saas\Img\advanced page 1.png" alt="Team Showcase Template" />
+      <div class="card-content">
+        <p class="description">Show off your squad with a clean, modern layout for player bios, stats, and headshots.</p>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Advanced-template.html" class="link-button">Professional Page</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Page Builder</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #061874;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #061874;
+    }
+
+    input[type="file"],
+    input[type="color"],
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    #logoPreview {
+      max-height: 60px;
+      display: none;
+      margin-top: 10px;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    #preview {
+      margin-top: 40px;
+      display: none;
+    }
+
+    #selectPlan {
+      display: none;
+      margin-top: 20px;
+      padding: 14px 28px;
+      background-color: #061874;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    #selectPlan:hover {
+      background-color: #3949ab;
+    }
+
+    iframe {
+      width: 100%;
+      height: 700px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Create Your Landing Page</h1>
+    <div class="form-group">
+      <label for="logoUpload">Upload Logo:</label>
+      <input type="file" id="logoUpload" accept="image/*">
+      <img id="logoPreview" alt="Logo preview" />
+    </div>
+    <div class="form-group">
+      <label for="baseColor">Base Colour:</label>
+      <input type="color" id="baseColor" value="#004080">
+    </div>
+    <div class="form-group">
+      <label for="secondaryColor">Secondary Colour:</label>
+      <input type="color" id="secondaryColor" value="#f4f4f4">
+    </div>
+    <div class="form-group">
+      <label for="highlightColor">Highlight/Shadow Colour:</label>
+      <input type="color" id="highlightColor" value="#000000">
+    </div>
+    <div class="form-group">
+      <label for="templateType">Select Template Type:</label>
+      <select id="templateType">
+        <option value="basic">Basic</option>
+        <option value="amateur">Amateur</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
+
+
+    <button onclick="createPage()">Create Your Page</button>
+
+    
+      <a href="index.html" class="cta-button">Home</a>
+
+    <div id="preview">
+      <h2 style="margin-top: 40px; color:#061874;">Preview:</h2>
+      <iframe id="mockupFrame"></iframe>
+     
+            <button><a href="SubscriptionPlans.html">Select Plan</a></button>
+  
+
+    </div>
+  </div>
+
+  <script>
+    const templates = {
+      basic: `
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grassroots FC - Basic Landing Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 20px;
+      background: #f4f4f4;
+      color: #222;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* Watermark Styling */
+    body::before {
+      content: "Basic Draft";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 5rem;
+      color: rgba(0, 0, 0, 0.08);
+      z-index: 999;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header img {
+      max-width: 120px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-weight: normal;
+      margin: 0;
+      font-size: 2rem;
+      color: #004080;
+    }
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    section h2 {
+      border-bottom: 2px solid #004080;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://via.placeholder.com/120x120?text=Logo" alt="Grassroots FC Logo" />
+  <h1>Grassroots FC</h1>
+</header>
+
+<main>
+  <section>
+    <h2>About Us</h2>
+    <p>Grassroots FC is a community football club dedicated to developing local talent and promoting the beautiful game.</p>
+  </section>
+
+  <section>
+    <h2>Latest News</h2>
+    <ul>
+      <li>New season kicks off on August 15th.</li>
+      <li>Youth academy trials scheduled for next month.</li>
+      <li>Our team won the regional cup last week!</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Email: contact@grassrootsfc.com</p>
+    <p>Phone: +123 456 7890</p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Grassroots FC. All rights reserved.
+</footer>
+
+</body>
+</html>
+
+      `,
+      amateur: `
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>River Park FC - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #eef2f5;
+      color: #222;
+      position: relative;
+    }
+
+    /* Watermark */
+    body::before {
+      content: "Basic Draft";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 6rem;
+      color: rgba(0, 0, 0, 0.06);
+      z-index: 9999;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h3 {
+      color: #003366;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .content-box {
+      background-color: white;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    .content-box p {
+      margin: 0;
+    }
+
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>River Park FC</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#matches">Matches</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to River Park FC</h2>
+    <p>Unity. Heart. Football.</p>
+  </section>
+
+  <main>
+    <section id="about">
+      <h3>About Us</h3>
+      <div class="content-box">
+        <p>River Park FC is a community football team established in 1995. Our goal is to develop local talent and enjoy the beautiful game with dedication and sportsmanship.</p>
+      </div>
+    </section>
+
+    <section id="news">
+      <h3>Club News</h3>
+      <div class="content-box">
+        <p><strong>June 15:</strong> River Park won the semi-final match against Highland Rovers with a score of 2-1!</p>
+      </div>
+      <div class="content-box">
+        <p><strong>June 10:</strong> Summer training sessions have officially begun. Join us every Tuesday and Thursday.</p>
+      </div>
+    </section>
+
+    <section id="matches">
+      <h3>Upcoming Fixtures</h3>
+      <div class="content-box">
+        <p><strong>June 25:</strong> River Park FC vs Oak Town FC – Home Stadium</p>
+      </div>
+      <div class="content-box">
+        <p><strong>July 2:</strong> River Park FC @ Lakeside United – Away</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 River Park FC. All rights reserved. | Contact: info@riverparkfc.org
+  </footer>
+
+</body>
+</html>
+
+      `,
+      advanced: `
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>River United FC - Advanced Landing Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #f0f4f8;
+      color: #222;
+      position: relative;
+    }
+
+    body::before {
+      content: "Basic Draft";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 6rem;
+      color: rgba(0, 0, 0, 0.06);
+      z-index: 1000;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff4c4c;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1503437313881-503a91226419?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .btn-cta {
+      background: #ff4c4c;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-cta:hover {
+      background: #e04343;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      color: #003366;
+      font-weight: 700;
+      margin-bottom: 25px;
+      border-bottom: 3px solid #ff4c4c;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .news-item, .match-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.05);
+      margin-bottom: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .news-item img, .match-item img {
+      width: 160px;
+      object-fit: cover;
+      height: 100px;
+    }
+
+    .news-content, .match-content {
+      padding: 15px 20px;
+      flex: 1;
+    }
+
+    .news-content h3, .match-content h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #004080;
+    }
+
+    .news-content p, .match-content p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 0.9rem;
+    }
+
+    .social-icons {
+      margin: 15px 0 5px;
+      font-size: 1.4rem;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #ff4c4c;
+    }
+
+    @media (max-width: 700px) {
+      .news-item, .match-item {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .news-item img, .match-item img {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://via.placeholder.com/150x50?text=River+United" alt="River United FC Logo" />
+  <nav aria-label="Primary Navigation">
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#matches">Matches</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" role="banner" aria-label="Hero Section with Club Mission and Call to Action">
+  <div class="hero-content">
+    <h1>River United FC</h1>
+    <p>Passion, Performance, Pride – Join the River United family today!</p>
+    <a href="#contact" class="btn-cta" role="button">Join Us</a>
+  </div>
+</section>
+
+<main>
+  <section id="about" aria-labelledby="about-title">
+    <h2 id="about-title">About River United FC</h2>
+    <p>Established in 1978, River United FC has become a symbol of resilience and teamwork. We compete at both local and regional levels, fostering young talent and embracing our community spirit.</p>
+  </section>
+
+  <section id="news" aria-labelledby="news-title">
+    <h2 id="news-title">Latest News</h2>
+    <article class="news-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=400&q=80" alt="Team celebrating a victory" />
+      <div class="news-content">
+        <h3>Victory at the Regional Cup</h3>
+        <p>Our team secured a thrilling win in the regional cup final last weekend. Fans celebrated an unforgettable match!</p>
+      </div>
+    </article>
+    <article class="news-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=400&q=80" alt="Training session" />
+      <div class="news-content">
+        <h3>Training Camp Starts Next Week</h3>
+        <p>Our pre-season training camp kicks off next Monday. Open for all registered players.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="matches" aria-labelledby="matches-title">
+    <h2 id="matches-title">Upcoming Matches</h2>
+    <article class="match-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=400&q=80" alt="Football stadium" />
+      <div class="match-content">
+        <h3>River United vs Mountain Rangers</h3>
+        <p>August 15, 2025 - Home Stadium</p>
+      </div>
+    </article>
+    <article class="match-item" tabindex="0">
+      <img src="https://images.unsplash.com/photo-1508264165352-258fbe9faee5?auto=format&fit=crop&w=400&q=80" alt="Fans cheering" />
+      <div class="match-content">
+        <h3>River United vs City Warriors</h3>
+        <p>August 22, 2025 - Away Game</p>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer id="contact" aria-label="Contact Information and Social Media">
+  <p>Contact us: info@riverunitedfc.com | +987 654 3210</p>
+  <div class="social-icons">
+    <a href="#" aria-label="Facebook">&#x1F426;</a>
+    <a href="#" aria-label="Twitter">&#x1F426;</a>
+    <a href="#" aria-label="Instagram">&#x1F426;</a>
+  </div>
+  <p>&copy; 2025 River United FC. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
+      `
+    };
+
+    const defaults = {
+      basic: { base: "#004080", secondary: "#f4f4f4", highlight: "#000000" },
+      amateur: { base: "#003366", secondary: "#eef2f5", highlight: "#000000" },
+      advanced: { base: "#003366", secondary: "#f0f4f8", highlight: "#ff4c4c" }
+    };
+
+    document.getElementById("templateType").addEventListener("change", () => {
+      const t = document.getElementById("templateType").value;
+      document.getElementById("baseColor").value = defaults[t].base;
+      document.getElementById("secondaryColor").value = defaults[t].secondary;
+      document.getElementById("highlightColor").value = defaults[t].highlight;
+    });
+
+    document.getElementById("logoUpload").addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const preview = document.getElementById("logoPreview");
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function createPage() {
+      const template = templates[document.getElementById("templateType").value];
+      const baseColor = document.getElementById("baseColor").value;
+      const secondaryColor = document.getElementById("secondaryColor").value;
+      const highlightColor = document.getElementById("highlightColor").value;
+      const logoInput = document.getElementById("logoUpload").files[0];
+
+      if (!logoInput) {
+        alert("Please upload a logo.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const logoDataURL = e.target.result;
+
+        const customizedTemplate = template
+          .replace(/#004080|#003366/g, baseColor)
+          .replace(/#f4f4f4|#eef2f5|#f0f4f8/g, secondaryColor)
+          .replace(/#000000|#ff4c4c/g, highlightColor)
+          .replace(/https:\/\/via\.placeholder\.com\/\d+x\d+\?text=Logo/g, logoDataURL)
+          .replace(/https:\/\/via\.placeholder\.com\/150x50\?text=River\+United/g, logoDataURL);
+
+        const blob = new Blob([customizedTemplate], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        document.getElementById("mockupFrame").src = url;
+        document.getElementById("preview").style.display = 'block';
+        document.getElementById("selectPlan").style.display = 'inline-block';
+      };
+
+      reader.readAsDataURL(logoInput);
+    }
+  </script>
+</body>
+</html>

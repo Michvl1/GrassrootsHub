@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Account – GrassrootsHub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #061874;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .account-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #061874;
+      margin-top: 1.5rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section p {
+      margin: 0.3rem 0;
+    }
+
+    .btn {
+      background: #061874;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #03306a;
+    }
+
+    .danger {
+      background: #e74c3c;
+    }
+
+    .danger:hover {
+      background: #c0392b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #1a1a1a;
+      color: #fff;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Account</h1>
+  </header>
+
+  <div class="account-container">
+    <div class="section">
+      <h2>Profile</h2>
+      <p><strong>Name:</strong> John Doe</p>
+      <p><strong>Email:</strong> john@example.com</p>
+      <p><strong>Status:</strong> Premium Member</p>
+    </div>
+
+    <div class="section">
+      <h2>Subscription</h2>
+      <p><strong>Plan:</strong> Premium</p>
+      <p><strong>Billing Cycle:</strong> Monthly</p>
+      <p><strong>Next Payment:</strong> Aug 5, 2025</p>
+      <button class="btn">Manage Subscription</button>
+    </div>
+
+    <div class="section">
+      <h2>Settings</h2>
+      <button class="btn">Change Password</button>
+      <button class="btn">Update Email</button>
+    </div>
+
+    <div class="section">
+      <h2>Support</h2>
+      <p>Need help? <a href="#">Contact Support</a></p>
+    </div>
+
+    <div class="section">
+      <button class="btn danger">Log Out</button>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 GrassrootsHub. All rights reserved.
+  </footer>
+</body>
+</html>

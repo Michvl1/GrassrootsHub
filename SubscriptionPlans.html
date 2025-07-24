@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscription Plans – GrassrootsHub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #061874;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    h1 {
+      color: #061874;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .toggle-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      flex: 1 1 280px;
+      max-width: 300px;
+      border: 2px solid transparent;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .plan:hover {
+      box-shadow: 0 0 20px rgba(18, 186, 27, 0.2);
+    }
+
+    .plan.highlight {
+      border-color: #12ba1b;
+    }
+
+    .plan h2 {
+      color: #061874;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .plan .price {
+      font-size: 2rem;
+      color: #e74c3c;
+      margin: 20px 0;
+    }
+
+    .plan ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .plan ul li {
+      margin: 10px 0;
+    }
+
+    .plan button,
+    .plan a.button-link {
+      background-color: #061874;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      width: auto;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .plan button:hover,
+    .plan a.button-link:hover {
+      background-color: #03306a;
+    }
+
+    .details {
+      margin-top: 15px;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .details.show {
+      display: block;
+    }
+
+    .details-btn {
+      background-color: #12ba1b;
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .details-btn:hover {
+      background-color: #0e8c15;
+    }
+
+    .home-link {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .home-link a {
+      text-decoration: none;
+      color: #061874;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+
+    .best-value {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background-color: #12ba1b;
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+
+    .toggle input[type="checkbox"] {
+      width: 40px;
+      height: 20px;
+      appearance: none;
+      background: #ccc;
+      outline: none;
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 1px;
+      left: 1px;
+      transition: 0.3s;
+    }
+
+    .toggle input[type="checkbox"]:checked {
+      background-color: #12ba1b;
+    }
+
+    .toggle input[type="checkbox"]:checked::before {
+      transform: translateX(20px);
+    }
+
+    @media (max-width: 768px) {
+      .plans {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div style="display: flex; align-items: center;">
+          <img src="C:\Users\micha\OneDrive\Documents\footy saas\Img\GRH logo.png" alt="GrassrootsHub Logo" style="height: 40px; margin-right: 10px;" />
+          <a href="index.html" style="font-size: 1.4rem; font-weight: bold; color: white;">GrassrootsHub</a>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="contact.html">Contact</a>
+        <a href="SubscriptionPlans.html">Prices</a>
+
+        
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Choose Your Pass</h1>
+    <div class="toggle-wrapper">
+      <div class="toggle">
+        <label for="toggle">Monthly</label>
+        <input type="checkbox" id="toggle" />
+        <label for="toggle">Annually</label>
+      </div>
+    </div>
+
+    <!-- MONTHLY PLANS -->
+    <div class="plans" id="monthly-plans">
+
+     <!-- Basic -->
+      <div class="plan">
+        <h2>Free Trial</h2>
+        <div class="price">FREE</div>
+        <ul>
+          <li>Sign up to get started</li>
+          <li>Unlimited Mock-up designs</li>
+          <li>No Subscription needed</li>
+        </ul>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Purchase-Membership.html" class="button-link">Select Plan</a>
+        <button class="details-btn">Details</button>
+         <div class="details">
+
+           <!-- ADD THIS SECTION -->
+    <p><strong>What's included:</strong></p>
+    <ul>
+      <li>✔ Try out all features risk-free</li>
+      <li>✔ Access sample templates</li>
+      <li>✔ No credit card required</li>
+    </ul>
+    <p><em>Use this space to add more info specific to this plan...</em></p>
+  </div>
+      </div>
+        
+           <!-- Amateur -->
+      <div class="plan">
+        <h2>Amateur - Pass</h2>
+        <div class="price">£25/mo</div>
+        <ul>
+          <li>Everything in free</li>
+          <li>Fast Download speed</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Purchase-Membership.html" class="button-link">Select Plan</a>
+        <button class="details-btn">Details</button>
+         <div class="details">
+           <!-- ADD THIS SECTION -->
+    <p><strong>What's included:</strong></p>
+    <ul>
+      <li>✔ Try out all features risk-free</li>
+      <li>✔ Access sample templates</li>
+      <li>✔ No credit card required</li>
+    </ul>
+    <p><em>Use this space to add more info specific to this plan...</em></p>
+  </div>
+      </div>
+
+      <!-- Advanced -->
+      <div class="plan highlight">
+        <div class="best-value">Best Value</div>
+        <h2>Premium - Pass</h2>
+        <div class="price">£60/mo</div>
+        <ul>
+          <li>Everything in Amateur</li>
+          <li>Unlimited changes</li>
+          <li>Cancel Anytime</li>
+        </ul>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Purchase-Membership.html" class="button-link">Select Plan</a>
+        <button class="details-btn">Details</button>
+         <div class="details"> 
+          
+          <!-- ADD THIS SECTION -->
+    <p><strong>What's included:</strong></p>
+    <ul>
+      <li>✔ Try out all features risk-free</li>
+      <li>✔ Access sample templates</li>
+      <li>✔ No credit card required</li>
+    </ul>
+    <p><em>Use this space to add more info specific to this plan...</em></p>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <!-- ANNUAL PLANS -->
+    <div class="plans" id="annual-plans" style="display: none;">
+      <!-- Basic -->
+      <div class="plan">
+        <h2>Free Trial</h2>
+        <div class="price">FREE</div>
+        <ul>
+          <li>Unlimited Website mock-ups </li>
+          <li>Customizable Colours & Fonts</li>
+          <li>Fast Downloads</li>
+        </ul>
+         <a href="C:\Users\micha\OneDrive\Documents\footy saas\Purchase-Membership.html" class="button-link">Select Plan</a>
+        <button class="details-btn">Details</button> 
+        <div class="details">
+        
+          <!-- ADD THIS SECTION -->
+          <p><strong>What's included:</strong></p>
+    <ul>
+      <li>✔ Try out all features risk-free</li>
+      <li>✔ Access sample templates</li>
+      <li>✔ No credit card required</li>
+    </ul>
+    <p><em>Use this space to add more info specific to this plan...</em></p>
+  </div>
+
+      </div>
+
+      <!-- Amateur Annual -->
+      <div class="plan">
+        <h2>Amateur- Pass</h2>
+        <div class="price">£250/year</div>
+        <ul>
+          <li>Everything in free</li>
+          <li>We keep your page up to date</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <div style="margin-bottom:10px; color: green;">(Save ~16.7%)</div>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Purchase-Membership.html" class="button-link">Select Plan</a>
+        <button class="details-btn">Details</button>
+        <div class="details">
+        
+          <!-- ADD THIS SECTION -->
+          <p><strong>What's included:</strong></p>
+    <ul>
+      <li>✔ Try out all features risk-free</li>
+      <li>✔ Access sample templates</li>
+      <li>✔ No credit card required</li>
+    </ul>
+    <p><em>Use this space to add more info specific to this plan...</em></p>
+  </div>
+
+  
+      </div>
+
+      <!-- Advanced Annual -->
+      <div class="plan highlight">
+        <div class="best-value">Best Value</div>
+        <h2>Premium - Pass</h2>
+        <div class="price">£650/year</div>
+        <ul>
+          <li>Everything in Amateur</li>
+          <li>Unlimited changes</li>
+          <li>Cancel Anytime</li>
+        </ul>
+        <div style="margin-bottom:10px; color: green;">(Save ~9.7%)</div>
+        <a href="C:\Users\micha\OneDrive\Documents\footy saas\Purchase-Membership.html" class="button-link">Select Plan</a>
+        <button class="details-btn">Details</button>
+        <div class="details">
+        
+          <!-- ADD THIS SECTION -->
+          <p><strong>What's included:</strong></p>
+    <ul>
+      <li>✔ Try out all features risk-free</li>
+      <li>✔ Access sample templates</li>
+      <li>✔ No credit card required</li>
+    </ul>
+    <p><em>Use this space to add more info specific to this plan...</em></p>
+  </div>
+
+      
+      
+    </div>
+
+    
+  </div>
+
+  <footer>
+    &copy; 2025 GrassrootsHub. All rights reserved.
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('toggle');
+    const monthlyPlans = document.getElementById('monthly-plans');
+    const annualPlans = document.getElementById('annual-plans');
+
+    toggle.addEventListener('change', () => {
+      if (toggle.checked) {
+        monthlyPlans.style.display = 'none';
+        annualPlans.style.display = 'flex';
+      } else {
+        monthlyPlans.style.display = 'flex';
+        annualPlans.style.display = 'none';
+      }
+    });
+
+    // Details toggle
+    document.querySelectorAll('.details-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const next = button.nextElementSibling;
+        if (next && next.classList.contains('details')) {
+          next.classList.toggle('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
